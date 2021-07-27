@@ -1,0 +1,62 @@
+﻿
+
+@{
+    ViewData["Title"] = "Movie Form";
+}
+
+@model Movie
+<h1>Movie Form</h1>
+
+@if (Model.id == 0)
+{
+    <form action="/movie/addmovie" method="post" class="form-control">
+     
+        <div class="form-row">
+            @Html.LabelFor(m => m.title)
+            @Html.ValidationMessageFor(m => m.title)
+            @Html.TextBoxFor(m => m.title)
+        </div>
+
+        <div class="form-row">
+            @Html.LabelFor(m => m.genre)
+            @Html.ValidationMessageFor(m => m.genre)
+            @Html.TextBoxFor(m => m.genre)
+        </div>
+
+        <div class="form-row">
+            @Html.LabelFor(m => m.runtime)
+            @Html.ValidationMessageFor(m => m.runtime)
+            @Html.TextBoxFor(m => m.runtime)
+        </div>
+        <div class="form-row">
+            <input type="submit" value="Submit Movie Info" />
+        </div>
+    </form>
+}
+else
+{
+<form action="/movie/editmovie" method="post" class="form-control">
+    <input type="text" name="id" value="@Model.id" hidden />
+
+    <div class="form-row">
+        <label asp-for="title"></label>
+        <input type="text" asp-for="title" value="@Model.title" />
+        <br />
+    </div>
+
+    <div class="form-row">
+        <label asp-for="genre"></label>
+        <input type="text" asp-for="genre" value="@Model.genre" />
+        <br />
+    </div>
+
+    <div class="form-row">
+        <label asp-for="runtime"></label>
+        <input type="number" asp-for="runtime" value="@Model.runtime" />
+        <br />
+    </div>
+    <div class="form-row">
+        <input type="submit" value="Submit Updated Movie Info" />
+    </div>
+</form>
+}
